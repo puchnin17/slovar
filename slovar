@@ -4,44 +4,38 @@
 #include <string>
 
 int main() {
-    // Создаем словарь для хранения соответствий слов на русском и английском
-    std::map<std::string, std::string> dictionary;
+std::map<std::string, std::string> dictionary;
 
-    // Заполняем словарь
-    dictionary["привет"] = "hello";
-    dictionary["hello"] = "привет";
-    dictionary["мир"] = "world";
-    dictionary["world"] = "мир";
+dictionary["привет"] = "hello";
+dictionary["hello"] = "привет";
+dictionary["мир"] = "world";
+dictionary["world"] = "мир";
+dictionary["пицца"] = "pizza";
+dictionary["pizza"] = "пицца";
 
-    // Открываем файл для записи
-    std::ofstream outputFile("translation.txt");
+std::ofstream outputFile("translation.txt");
 
-    // Переводим и записываем слова
-    std::string inputWord;
-    while (true) {
-        std::cout << "Введите слово (или 'выход' для завершения): ";
+std::string inputWord;
+while (true) {
+    std::cout << "Введите слово (или 'выход' для завершения): ";
         std::cin >> inputWord;
-        
-        //Проверка, является ли введенное слово "выход" (для завершения программы):
-        if (inputWord == "выход") {
-            break;
-        }
+if (inputWord == "выход") {
+    break;
+}
 
-        // Пытаемся найти перевод в словаре
-        auto translation = dictionary.find(inputWord);
-        
-        //Запись результата в файл 'translation.txt'. Если перевод не найден, записывается сообщение "Не найдено в словаре":
-        if (translation != dictionary.end()) {
-            outputFile << inputWord << " - " << translation->second << std::endl;
-        } else {
-            outputFile << inputWord << " - Не найдено в словаре" << std::endl;
-        }
+auto translation = dictionary.find(inputWord);
+
+    if (translation != dictionary.end()) {
+outputFile << inputWord << " - " << translation->second << std::endl;
+} 
+else 
+{
+    outputFile << inputWord << " - Не найдено в словаре" << std::endl;
+}
     }
 
-    // Закрываем файл
-    outputFile.close();
-
-    std::cout << "Переводы записаны в файл 'translation.txt'" << std::endl;
+outputFile.close();
+std::cout << "Переводы записаны в файл translation.txt" << std::endl;
 
     return 0;
 }
