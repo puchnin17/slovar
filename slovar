@@ -12,7 +12,6 @@ int main() {
     dictionary["hello"] = "привет";
     dictionary["мир"] = "world";
     dictionary["world"] = "мир";
-    // Добавьте другие слова и их переводы по мере необходимости
 
     // Открываем файл для записи
     std::ofstream outputFile("translation.txt");
