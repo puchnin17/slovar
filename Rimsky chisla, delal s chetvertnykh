@@ -30,17 +30,88 @@ std::string result = "";
 std::map<int, std::string, std::greater<int>> arabicToRomanMap = 
 {
     {1000, "M"},
-    {900, "CM"},
     {500, "D"},
-    {400, "CD"},
     {100, "C"},
-    {90, "XC"},
     {50, "L"},
-    {40, "XL"},
     {10, "X"},
-    {9, "IX"},
     {5, "V"},
-    {4, "IV"},
+    {1, "I"}
+};
+
+for (const auto& entry : arabicToRomanMap) {
+while (arabic >= entry.first) {
+    result += entry.second;
+    arabic -= entry.first;
+}
+}
+    return result;
+}
+
+int main() {
+char choice;
+std::cout << "Выберите тип числа (R - римское, A - арабское): ";
+std::cin >> choice;
+if (choice == 'R' || choice == 'r') {
+    std::string romanNumber;
+    std::cout << "Введите римское число: ";
+    std::cin >> romanNumber;
+
+int arabicNumber = romanToArabic(romanNumber);
+    std::cout << romanNumber << " в арабских числах: " << arabicNumber << std::endl;
+}
+else if (choice == 'A' || choice == 'a') {
+    int arabicNumber;
+    std::cout << "Введите арабское число: ";
+    std::cin >> arabicNumber;
+
+    std::string romanNumber = arabicToRoman(arabicNumber);
+    std::cout << arabicNumber << " в римских числах: " << romanNumber << std::endl;
+} 
+    else
+{
+        std::cout << "Некорректный выбор." << std::endl;
+        }
+
+    return 0;
+}
+//
+#include <iostream>
+#include <map>
+#include <string>
+
+std::map<char, int> romanToArabicMap = {
+    {'I', 1},
+    {'V', 5},
+    {'X', 10},
+    {'L', 50},
+    {'C', 100},
+    {'D', 500},
+    {'M', 1000}
+};
+
+int romanToArabic(const std::string& roman) {
+int result = 0;
+for (int i = 0; i < roman.length(); i++) {
+if (i + 1 < roman.length() && romanToArabicMap[roman[i]] < romanToArabicMap[roman[i + 1]]) {
+    result -= romanToArabicMap[roman[i]];
+} else
+{
+    result += romanToArabicMap[roman[i]];
+}
+    }
+return result;
+}
+
+std::string arabicToRoman(int arabic) {
+std::string result = "";
+std::map<int, std::string, std::greater<int>> arabicToRomanMap = 
+{
+    {1000, "M"},
+    {500, "D"},
+    {100, "C"},
+    {50, "L"},
+    {10, "X"},
+    {5, "V"},
     {1, "I"}
 };
 
